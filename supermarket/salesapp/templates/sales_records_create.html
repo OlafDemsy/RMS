@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>创建销售订单</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #f0f4f8;
+    color: #34495e;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    background: #fff;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  nav h1 {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #2c3e50;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #34495e;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: transparent;
+    box-shadow: 0 0 0 transparent;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.15s ease;
+    user-select: none;
+  }
+
+  .nav-links a:hover {
+    background: linear-gradient(135deg, #6b6bff 0%, #8a8aff 100%);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 12px #8a8aff;
+  }
+
+  .nav-links a.active {
+    background: linear-gradient(135deg, #6b6bff 0%, #8a8aff 100%);
+    color: #fff;
+    box-shadow: 0 0 14px #8a8aff;
+    pointer-events: none;
+    transform: scale(1.1);
+  }
+
+  .btn-logout {
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.6);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  .btn-logout:hover {
+    background: #c0392b;
+    box-shadow: 0 6px 16px rgba(192, 57, 43, 0.8);
+    transform: translateY(-2px);
+  }
+
+  main {
+    flex: 1;
+    max-width: 500px;
+    width: 100%;
+    margin: 3rem auto;
+    background: #fff;
+    padding: 2.5rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+    text-align: center;
+    user-select: none;
+  }
+
+  main h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #34495e;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1.5px solid #ddd;
+    background-color: #fafafa;
+    color: #34495e;
+    font-size: 1rem;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus {
+    background-color: #f0f4ff;
+    border-color: #6b6bff;
+    outline: none;
+    box-shadow: 0 0 8px #8a8aff;
+  }
+
+  button[type="submit"] {
+    padding: 14px 0;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #6b6bff 0%, #8a8aff 100%);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.2s ease;
+    user-select: none;
+  }
+
+  button[type="submit"]:hover {
+    background: linear-gradient(135deg, #8a8aff 0%, #a1aaff 100%);
+    box-shadow: 0 0 18px #8a8aff;
+    transform: translateY(-2px);
+  }
+
+  /* 响应式 */
+  @media (max-width: 440px) {
+    nav {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 0.5rem 1rem;
+    }
+    nav h1 {
+      flex: 1 100%;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .nav-links {
+      flex: 1 100%;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    main {
+      margin: 1.5rem 1rem;
+      padding: 1.5rem 1.5rem;
+    }
+    main h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+    label {
+      font-size: 0.9rem;
+    }
+    input[type="text"],
+    input[type="number"] {
+      font-size: 0.9rem;
+      padding: 10px 12px;
+    }
+    button[type="submit"] {
+      font-size: 1rem;
+      padding: 12px 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>超市管理系统</h1>
+  <div class="nav-links">
+    <a href="{% url 'sales_dashboard' %}" class="{% if request.resolver_match.url_name == 'sales_dashboard' %}active{% endif %}">主页</a>
+    <a href="{% url 'sales_records_create' %}" class="{% if request.resolver_match.url_name == 'sales_records_create' %}active{% endif %}">创建销售订单</a>
+    <a href="{% url 'sales_records_list' %}" class="{% if request.resolver_match.url_name == 'sales_records_list' %}active{% endif %}">销售记录</a>
+    <a href="{% url 'sales_profit_summary' %}" class="{% if request.resolver_match.url_name == 'sales_profit_summary' %}active{% endif %}">销售利润汇总</a>
+    <a href="{% url 'logout' %}" class="btn-logout">登出</a>
+  </div>
+</nav>
+
+<main>
+  <h2>创建销售订单</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+
+    <label for="product_name">商品名:</label>
+    <input type="text" id="product_name" name="product_name" required />
+
+    <label for="customer_name">客户姓名:</label>
+    <input type="text" id="customer_name" name="customer_name" required />
+
+    <label for="sales_quantity">销售数量:</label>
+    <input type="number" id="sales_quantity" name="sales_quantity" min="1" required />
+
+    <button type="submit">提交订单</button>
+  </form>
+</main>
+
+</body>
+</html>

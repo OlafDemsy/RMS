@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>销售员工作台 - 超市管理系统</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: #f0f4f8;
+    color: #34495e;
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    background: #fff;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  nav h1 {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #2c3e50;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #34495e;
+    padding: 6px 14px;
+    border-radius: 12px;
+    background: transparent;
+    box-shadow: 0 0 0 transparent;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.15s ease;
+    user-select: none;
+  }
+
+  .nav-links a:hover {
+    background: linear-gradient(135deg, #6b6bff 0%, #8a8aff 100%);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 0 12px #8a8aff;
+  }
+
+  .nav-links a.active {
+    background: linear-gradient(135deg, #6b6bff 0%, #8a8aff 100%);
+    color: #fff;
+    box-shadow: 0 0 14px #8a8aff;
+    pointer-events: none;
+    transform: scale(1.1);
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+  }
+
+  .welcome-card {
+    background: #fff;
+    padding: 2.5rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    user-select: none;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* 响应式 */
+  @media (max-width: 440px) {
+    nav {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 0.5rem 1rem;
+    }
+
+    nav h1 {
+      flex: 1 100%;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .nav-links {
+      flex: 1 100%;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    main {
+      padding: 2rem 1rem;
+    }
+
+    .welcome-card {
+      font-size: 1.4rem;
+      padding: 2rem 1.5rem;
+      border-radius: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <h1>超市管理系统</h1>
+  <div class="nav-links">
+    <a href="{% url 'sales_dashboard' %}" class="{% if request.resolver_match.url_name == 'sales_dashboard' %}active{% endif %}">主页</a>
+    <a href="{% url 'sales_records_create' %}" class="{% if request.resolver_match.url_name == 'sales_records_create' %}active{% endif %}">创建销售订单</a>
+    <a href="{% url 'sales_records_list' %}" class="{% if request.resolver_match.url_name == 'sales_records_list' %}active{% endif %}">销售记录</a>
+    <a href="{% url 'sales_profit_summary' %}" class="{% if request.resolver_match.url_name == 'sales_profit_summary' %}active{% endif %}">销售利润汇总</a>
+    <a href="{% url 'logout' %}">登出</a>
+  </div>
+</nav>
+
+<main>
+  <div class="welcome-card">
+    欢迎您，{{ user_name }}！
+  </div>
+</main>
+
+</body>
+</html>
